@@ -55,7 +55,7 @@ def countdown(aantalTijd):
     if aantalTijd > 0:
         # call de countdown opnieuw na 1 seconden
         root.after(1000, countdown, aantalTijd-1)
-    elif aantalTijd == 0:
+    elif aantalTijd <= 0:
         opnieuw()
 
 def tussenstap():
@@ -161,7 +161,7 @@ tijdEntry = ttk.Entry(
 )
 tijd
 tijdEntry.pack(padx=50, pady=70)
-tijdButton = ttk.Button(command=destroy)
+tijdButton = ttk.Button(text = 'klik om tijd op te slaan',command=destroy)
 tijdButton.pack()
 
 #plek van de knop
