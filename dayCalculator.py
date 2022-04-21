@@ -23,15 +23,15 @@ def calculate():
     deltaDate = date2-date1
     if deltaDate.days > 0:
         if deltaDate.days == 1:
-            tkinter.messagebox.showwarning('days calculator', 'dat is morgen')
+            tkinter.messagebox.showinfo('days calculator', 'dat is morgen')
         elif deltaDate.days > 1:
-            tkinter.messagebox.showwarning('days calculator', f'dat is {deltaDate.days} dagen in de toekomst')
+            tkinter.messagebox.showinfo('days calculator', f'dat is {deltaDate.days} dagen in de toekomst')
     elif deltaDate.days < 0:
         if deltaDate.days == -1:
-            tkinter.messagebox.showwarning('days calculator', 'dat was gisteren')
+            tkinter.messagebox.showinfo('days calculator', 'dat was gisteren')
         elif deltaDate.days < -1:
-            tkinter.messagebox.showwarning('days calculator', f'dat is {-deltaDate.days} dagen in het verleden')
-    else: tkinter.messagebox.showwarning('days calculator', 'dat is vandaag')
+            tkinter.messagebox.showinfo('days calculator', f'dat is {-deltaDate.days} dagen in het verleden')
+    else: tkinter.messagebox.showinfo('days calculator', 'dat is vandaag')
 
 months = {
     'Jan': [i for i in range(1,32)],
