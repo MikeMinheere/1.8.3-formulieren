@@ -19,7 +19,7 @@ def update(arg1,arg2,arg3):
 
 def calculate():
     date1 = date.today()
-    date2 = date(int(jaar.get()),list(months.keys()).index(monthsCombo.get()) + 1,int(dagen.get()))
+    date2 = date(int(jaar.get()),list(months.keys()).index(monthsCombo.get()) + 1,int(dagen.get())) 
     deltaDate = date2-date1
     if deltaDate.days > 0:
         if deltaDate.days == 1:
