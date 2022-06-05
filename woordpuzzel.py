@@ -2,6 +2,7 @@ from string import ascii_lowercase
 import random
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 sbList = list()
 
@@ -14,9 +15,9 @@ def checkWoord():
         radenGenerator()
 
 def radenGenerator():
-    global sbList
-    radenFrame = Frame(root)
-    radenFrame.pack()
+    global sbList,score,woordVarLen
+    woordVarLen=len(woordVar.get())
+    score=(woordVarLen*woordVarLen)
     for i in range(len(woordVar.get())):
         ranNum = random.randint(0, 3)
         ansVar = StringVar()
@@ -32,18 +33,25 @@ def radenGenerator():
         sb.place(relheight=0.2, relwidth=0.9 / len(woordVar.get()) , rely=0.4, relx=0.025 + (0.95 / len(woordVar.get()) * i))
         sbList.append(ansVar)
     submitButton = Button(root,text='stuur antwoord',command=checkAnswer)
-    submitButton.pack()
     submitButton.place(rely=0.8,relx=0.42)
 
 def checkAnswer():
+    global score
     checkLetter=0
     for i in range(len(sbList)):
         if sbList[i].get() ==woordVar.get()[i]:
             checkLetter +=1
     if checkLetter==len(woordVar.get()):
-        print('kaas')
+        print('Gefeliciteerd')
     elif checkLetter!=woordVar.get()[i]:
-        print()
+        print("helaas, er zijn "+ str(checkLetter)+' letters goed')
+        score -= 2*(woordVarLen-checkLetter)
+        if score <= 0:
+            fout =messagebox.askquestion(title='verloren',message='Je hebt verloren. opnieuw spelen?')
+            if fout == 'yes':
+                pass
+            elif fout == 'no':
+                root.destroy()
 def invulGenerator():
     global foutMessage, woordVar, frame
     frame = Frame(root)
@@ -67,6 +75,7 @@ def invulGenerator():
 root = Tk()
 root.title('word guesser')
 root.geometry('500x330')
+root.resizable(width=FALSE, height=FALSE)
 
 invulGenerator()
 root.mainloop()
