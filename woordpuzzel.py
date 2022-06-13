@@ -39,20 +39,23 @@ def radenGenerator():
     submitButton.place(rely=0.8,relx=0.42)
 
 def checkAnswer():
-    helaas = Label(frame2,text="helaas, er zijn "+ str(checkLetter)+' letters goed')
-    gefeliciteer = Label(frame2,text="gefeliciteerd, je hebt gewonnen!")
     global score
     checkLetter=0
     for i in range(len(sbList)):
         if sbList[i].get() ==woordVar.get()[i]:
             checkLetter +=1
     if checkLetter==len(woordVar.get()):
-        print('Gefeliciteerd')
+        gewonnen = messagebox.askquestion(title="gewonnen",message="Gefeliciteerd! je hebt gewonnen. opnieuw spelen?")
+        if gewonnen == 'yes':
+            frame2.destroy()
+            invulGenerator()
+        elif gewonnen == 'no':
+            root.destroy()
     elif checkLetter!=woordVar.get()[i]:
-        helaas.place(relx=0.45,rely=0.9)
+        helaas = messagebox.showinfo(title='letters fout',message="helaas, er zijn "+ str(checkLetter)+' letters goed')
         score -= 2*(woordVarLen-checkLetter)
         if score <= 0:
-            fout =messagebox.askquestion(title='verloren',message='Je hebt verloren. opnieuw spelen?')
+            fout = messagebox.askquestion(title='verloren',message='Je hebt verloren. opnieuw spelen?')
             if fout == 'yes':
                 frame2.destroy()
                 invulGenerator()
@@ -60,7 +63,7 @@ def checkAnswer():
                 root.destroy()
 def invulGenerator():
     global foutMessage, woordVar, frame
-    frame = Frame(root)
+    frame = Frame(root,background='green')
     frame.pack()
 
     vulIn = Label(frame, text='vul een woord in')
