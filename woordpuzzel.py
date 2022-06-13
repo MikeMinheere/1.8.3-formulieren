@@ -15,10 +15,10 @@ def checkWoord():
         radenGenerator()
 
 def radenGenerator():
-    global frame2
+    global frame2,sbList,score,woordVarLen
+    sbList.clear()
     frame2 = Frame(root)
-    frame2.place(relheight=1,relwidth=1,relx=0,rely=0)
-    global sbList,score,woordVarLen
+    frame2.place(relheight=1,relwidth=1,relx=0,rely=0) 
     woordVarLen=len(woordVar.get())
     score=(woordVarLen*woordVarLen)
     for i in range(len(woordVar.get())):
@@ -39,6 +39,8 @@ def radenGenerator():
     submitButton.place(rely=0.8,relx=0.42)
 
 def checkAnswer():
+    helaas = Label(frame2,text="helaas, er zijn "+ str(checkLetter)+' letters goed')
+    gefeliciteer = Label(frame2,text="gefeliciteerd, je hebt gewonnen!")
     global score
     checkLetter=0
     for i in range(len(sbList)):
@@ -47,7 +49,7 @@ def checkAnswer():
     if checkLetter==len(woordVar.get()):
         print('Gefeliciteerd')
     elif checkLetter!=woordVar.get()[i]:
-        print("helaas, er zijn "+ str(checkLetter)+' letters goed')
+        helaas.place(relx=0.45,rely=0.9)
         score -= 2*(woordVarLen-checkLetter)
         if score <= 0:
             fout =messagebox.askquestion(title='verloren',message='Je hebt verloren. opnieuw spelen?')
