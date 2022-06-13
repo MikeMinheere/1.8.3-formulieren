@@ -15,6 +15,9 @@ def checkWoord():
         radenGenerator()
 
 def radenGenerator():
+    global frame2
+    frame2 = Frame(root)
+    frame2.place(relheight=1,relwidth=1,relx=0,rely=0)
     global sbList,score,woordVarLen
     woordVarLen=len(woordVar.get())
     score=(woordVarLen*woordVarLen)
@@ -22,7 +25,7 @@ def radenGenerator():
         ranNum = random.randint(0, 3)
         ansVar = StringVar()
         sb = Spinbox(
-            root,
+            frame2,
             values=[woordVar.get()[i] if x == ranNum else random.choice(ascii_lowercase) for x in range(5)],
             wrap=True,
             font=(14),
@@ -32,7 +35,7 @@ def radenGenerator():
         sb.configure(state='readonly')
         sb.place(relheight=0.2, relwidth=0.9 / len(woordVar.get()) , rely=0.4, relx=0.025 + (0.95 / len(woordVar.get()) * i))
         sbList.append(ansVar)
-    submitButton = Button(root,text='stuur antwoord',command=checkAnswer)
+    submitButton = Button(frame2,text='stuur antwoord',command=checkAnswer)
     submitButton.place(rely=0.8,relx=0.42)
 
 def checkAnswer():
@@ -49,7 +52,8 @@ def checkAnswer():
         if score <= 0:
             fout =messagebox.askquestion(title='verloren',message='Je hebt verloren. opnieuw spelen?')
             if fout == 'yes':
-                pass
+                frame2.destroy()
+                invulGenerator()
             elif fout == 'no':
                 root.destroy()
 def invulGenerator():
