@@ -63,7 +63,7 @@ def checkAnswer():
                 root.destroy()
 def invulGenerator():
     global foutMessage, woordVar, frame
-    frame = Frame(root,background='green')
+    frame = Frame(root)
     frame.pack()
 
     vulIn = Label(frame, text='vul een woord in')
